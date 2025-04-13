@@ -48,11 +48,20 @@
         div.python > h2.h2-text {
             color: blue;
         }
+
+        ul>li:nth-child(2) {
+            color: blue;
+        }
+
+        div > p:nth-of-type(3) {
+            color: blue;
+        }
     </style>
 </head>
 <body>
     <div class="python">
         <h1 class="h1-text">This is H1</h1>
+        <h1 id="h1-text">This is H1-2</h1>
         <h2 class="h2-text">This is H2</h2>
         <h6 class="h2-text h6-text">This is H6</h6>
         <p>Playwright provides a Pytest plugin to write <span>end-to-end tests</span>. To get started with it, refer to the getting started guide.</p>
@@ -100,9 +109,26 @@
             </tbody>
         </table>
     </div>
+    <div class="nth">
+        <p>1</p>
+        <p>2</p>
+        <h6>3</h6>
+        <h5>4</h5>
+        <p>5</p>
+    </div>
     <div class="javascript">
         <h2 class="h2-text">This is js!</h2>
         <a href="https://playwright.dev/">Jabroscript</a>
+        <ul>
+            <li>item1</li>
+            <li>item2</li>
+            <li>item3</li>
+        </ul>
+        <ol>
+            <li>item1</li>
+            <li>item2</li>
+            <li>item3</li>
+        </ol>
     </div>
 </body>
 </html>
