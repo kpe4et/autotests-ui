@@ -21,9 +21,9 @@ with sync_playwright() as playwright:
     registration_button.click()
 
     # Проверка, что слово Dashboard присутствует на странице
-    page_title = page.get_by_test_id("dashboard-toolbar-title-text")
+    dashboard_title = page.get_by_test_id("dashboard-toolbar-title-text")
     page.wait_for_load_state('load')
-    expect(page_title).to_have_text("Dashboard")
+    expect(dashboard_title).to_have_text("Dashboard")
 
     # page.wait_for_timeout(5000)
 
