@@ -1,8 +1,10 @@
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
+import pytest
 
+
+@pytest.mark.regression
+@pytest.mark.authorization
 def test_wrong_email_or_password_authorization():
-    from playwright.sync_api import sync_playwright, expect
-
     # Запуск Playwright в синхронном режиме
     with sync_playwright() as playwright:
         # Открываем браузер Chromium (не в Headless режиме, чтобы видеть процесс)
