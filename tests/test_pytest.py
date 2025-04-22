@@ -1,25 +1,35 @@
-def test_first_try():
-    print("Hello World!")
+import pytest
 
+@pytest.mark.smoke
+class TestLogin:
+    @pytest.mark.smoke
+    def test_valid_login(self):
+        pass
 
-# class TestUserLogin:
+    @pytest.mark.regression
+    def test_invalid_login(self):
+        pass
 
-#     def test_1(self):
-#         ...
+@pytest.mark.regression
+class TestRegistration:
+    @pytest.mark.regression
+    def test_valid_registration(self):
+        pass
 
-#     def test_2(self):
-#         ...
+    @pytest.mark.smoke
+    def test_invalid_registration(self):
+        pass
 
+@pytest.mark.smoke
+@pytest.mark.regression
+class TestCheckout:
+    @pytest.mark.smoke
+    @pytest.mark.regression
+    def test_valid_checkout(self):
+        pass
 
-# def test_assert_positive_case():  # Новый тест, которые проверяет положительный кейс
-#     assert (2 + 2) == 4  # Ожидается, что тест пройдет
-#     assert (3 + 3) == 6  # Ожидается, что тест пройдет
-#     assert (5 + 5) == 1  # Ожидается, что тест пройдет
-#     assert (4 + 4) == 8  # Ожидается, что тест пройдет
-#     assert (1 + 1) == 1  # Ожидается, что тест пройдет
+    def test_invalid_checkout(self):
+        pass
 
-
-# def test_assert_negative_case():  # Новый тест, которые проверяет негативный кейс
-#     assert (2 + 2) == 5, "2 + 2 != 5" # Тут должна быть ошибка
-
-
+def test_search():
+    pass
