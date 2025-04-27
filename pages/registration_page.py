@@ -11,7 +11,7 @@ class RegistrationPage(BasePage):
         self.username_input = page.get_by_test_id('registration-form-username-input').locator('input')
         self.registration_button = page.get_by_test_id('registration-page-registration-button')
 
-    def fill_registration_form(self, username, email, password):
+    def fill_registration_form(self, username: str, email: str, password: str):
         self.email_input.fill(email)
         expect(self.email_input).to_have_value(email)
 

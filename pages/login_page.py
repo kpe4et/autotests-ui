@@ -15,7 +15,7 @@ class LoginPage(BasePage):
         self.wrong_email_or_password_alert = page.get_by_test_id('login-page-wrong-email-or-password-alert')
 
     # Метод заполняния формы авторизации
-    def fill_login_form(self, email, password):
+    def fill_login_form(self, email: str, password: str):
         self.email_input.fill(email)
         expect(self.email_input).to_have_value(email) # проверяем, что поле email было заполнено верно
 
