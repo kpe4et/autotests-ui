@@ -43,7 +43,8 @@ def initialize_browser_state(playwright: Playwright) -> None:
 
 
 # Фикстура для запуска тестов с сохраненным состоянием браузера
-@pytest.fixture(autouse=True)
+#@pytest.fixture(autouse=True) мешает
+@pytest.fixture
 def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Page:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context(storage_state="browser-state.json")

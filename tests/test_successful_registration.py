@@ -1,32 +1,22 @@
 from playwright.sync_api import Page, expect
 import pytest
+from pages.registration_page import RegistrationPage
+from pages.dashboard_page import DashboardPage
+import time
 
+
+@pytest.mark.parametrize("email, password, username", [('user.name@gmail.com', "username", "password") ])
 @pytest.mark.regression  # Добавили маркировку regression
 @pytest.mark.registration  # Добавили маркировку registration
-def test_successful_registration(chromium_page: Page):
-
-        # Открытие страницы с формой регистрации
-        chromium_page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
-
-        # Заполнение формы регистрации
-        email_input = chromium_page.get_by_test_id('registration-form-email-input').locator('input')
-        email_input.fill('user.name@gmail.com')
-        
-        username_input = chromium_page.get_by_test_id('registration-form-username-input').locator('input')
-        username_input.fill('username')
-        
-        password_input = chromium_page.get_by_test_id('registration-form-password-input').locator('input')
-        password_input.fill('password')
-
-        # Нажатие кнопки регистрации
-        registration_button = chromium_page.get_by_test_id('registration-page-registration-button')
-        registration_button.click()
-
+def test_successful_registration(registration_page: RegistrationPage, dashboard_page: DashboardPage, email, username, password):
+        registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+        time.sleep(2)
+        registration_page.fill_registration_form(email=email, username=username, password=password)
+        registration_page.click_registration_button()
+        time.sleep(2)
         # Проверка, что слово Dashboard присутствует на странице
-        dashboard_title = chromium_page.get_by_test_id("dashboard-toolbar-title-text")
-        chromium_page.wait_for_load_state('load')
-        expect(dashboard_title).to_have_text("Dashboard")
-
+        dashboard_page.validate_dashboard_page_title("Dashboard") # может, метод стоило назвать validate_title, раз контекст и так понятен
+        time.sleep(2)
         # context.storage_state(path="browser-state.json")
         # page.wait_for_timeout(5000)
 
