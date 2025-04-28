@@ -144,7 +144,7 @@ class CreateCoursePage(BasePage):
         expect(self.create_course_excercises_empty_view_description).to_be_visible()
         expect(self.create_course_excercises_empty_view_description).to_have_text('Click on "Create exercise" button to create new exercise')
 
-    def click_delete_exercise_button(self, index):
+    def click_delete_exercise_button(self, index: int):
         delete_exercise_button = self.page.get_by_test_id(
             f"create-course-exercise-{index}-box-toolbar-delete-exercise-button"
         )
@@ -167,7 +167,7 @@ class CreateCoursePage(BasePage):
         expect(exercise_description_input).to_be_visible()
         expect(exercise_description_input).to_have_value(description)
 
-    def fill_create_exercise_form(self, index, title, description):
+    def fill_create_exercise_form(self, index: int, title: str, description: str):
         exercise_title_input = self.page.get_by_test_id(
             f"create-course-exercise-form-title-{index}-input"
         )
