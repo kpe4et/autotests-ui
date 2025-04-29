@@ -1,5 +1,5 @@
 import pytest # Импортируем pytest
-from playwright.sync_api import Page, Playwright  # Имопртируем класс страницы, будем использовать его для аннотации типов
+from playwright.sync_api import Page, Playwright
 
 
 @pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно1
