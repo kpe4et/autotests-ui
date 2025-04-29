@@ -155,7 +155,7 @@ class CreateCoursePage(BasePage):
         )
         delete_exercise_button.click()
 
-    def check_visible_create_exercise_form(self, index: int, title:str, description:str):
+    def check_visible_create_exercise_form(self, index: int, title: str, description: str):
         excescise_subtitle = self.page.get_by_test_id(f"create-course-exercise-{index}-box-toolbar-subtitle-text")
         exercise_title_input = self.page.get_by_test_id(
             f"create-course-exercise-form-title-{index}-input"
