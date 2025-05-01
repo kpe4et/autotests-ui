@@ -24,10 +24,8 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         
         create_course_page.check_disabled_create_course_button()
         
-        create_course_page.check_visible_image_preview_empty_view()
-        
-        create_course_page.check_visible_image_upload_view()
-        
+        create_course_page.image_upload_widget.check_visible(is_image_uploaded=False)
+
         create_course_page.check_visible_create_course_form(
                 title='', estimated_time='', description='', max_score='0', min_score='0'
                 )
@@ -40,9 +38,8 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         create_course_page.check_visible_exercises_empty_view()
         
         # Заполняем данные курса и создаем его
-        create_course_page.upload_preview_image('./testdata/files/image.jpg')
-        
-        create_course_page.check_visible_image_upload_view()
+        create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.jpg')
+        create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
         
         create_course_page.fill_create_course_form(
                 title='Playwright', estimated_time='2 weeks', description='Playwright', max_score='100', min_score='10'
