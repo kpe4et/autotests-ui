@@ -29,7 +29,7 @@ def initialize_browser_state(playwright: Playwright) -> None:
     email_input.fill("test@mail.ru")
 
     username_input = page.get_by_test_id("registration-form-username-input").locator("input")
-    username_input.fill("test_username")
+    username_input.fill("username")
 
     password_input = page.get_by_test_id("registration-form-password-input").locator("input")
     password_input.fill("test_password")
