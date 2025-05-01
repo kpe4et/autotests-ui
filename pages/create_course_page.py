@@ -10,7 +10,7 @@ class CreateCoursePage(BasePage):
         super().__init__(page)
 
         self.preview_empty_view = EmptyViewComponent(page, identifier="create-course-preview")
-        self.excercises_empty_view = EmptyViewComponent(page, identifier="create-course-excercises")
+        self.excercises_empty_view = EmptyViewComponent(page, identifier="create-course-exercises")
 
         # Заголовок и кнопка создания курса
         self.create_course_title = page.get_by_test_id('create-course-toolbar-title-text')
