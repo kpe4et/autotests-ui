@@ -2,6 +2,7 @@ from playwright.sync_api import Page, expect
 
 from components.navigation.navbar_component import NavbarComponent
 from components.navigation.sidebar_component import SidebarComponent
+from components.views.empty_view_component import EmptyViewComponent
 from pages.base_page import BasePage
 
 
@@ -9,9 +10,10 @@ class CoursesListPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        # добавим компоненты сайдбара и навбара
-        self.sidebar = SidebarComponent(page)
+        
         self.navbar = NavbarComponent(page)
+        self.sidebar = SidebarComponent(page)
+        self.empty_view = EmptyViewComponent(page, identifier="courses-list")
 
         # заголовок и кнопка создания нового курса
         self.courses_title = page.get_by_test_id('courses-list-toolbar-title-text')
@@ -28,24 +30,15 @@ class CoursesListPage(BasePage):
         self.course_menu_button = page.get_by_test_id('course-widget-menu-button')
         self.course_edit_menu_item = page.get_by_test_id('course-view-edit-menu-item')
         self.course_delete_menu_item = page.get_by_test_id('course-view-delete-menu-item')
-
-        # пустой блок при отсутствии курсов
-        self.empty_courses_icon = page.get_by_test_id('courses-list-empty-view-icon')
-        self.empty_courses_title = page.get_by_test_id('courses-list-empty-view-title-text')
-        self.empty_courses_description = page.get_by_test_id('courses-list-empty-view-description-text')
+        
 
     def check_visible_courses_title(self):
         expect(self.courses_title).to_be_visible()
         expect(self.courses_title).to_have_text('Courses')
 
     def check_visible_empty_view(self):
-        expect(self.empty_courses_icon).to_be_visible()
-
-        expect(self.empty_courses_title).to_be_visible()
-        expect(self.empty_courses_title).to_have_text('There is no results')
-
-        expect(self.empty_courses_description).to_be_visible()
-        expect(self.empty_courses_description).to_have_text('Results from the load test pipeline will be displayed here')
+        self.empty_view.check_visible(title="There is no results", 
+                                                 description="Results from the load test pipeline will be displayed here")
 
     def check_visible_create_course_button(self):
         expect(self.create_course_button).to_be_visible()
