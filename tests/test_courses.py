@@ -10,8 +10,7 @@ def test_empty_courses_list(courses_list_page_with_state: CoursesListPage):
 
         courses_list_page_with_state.navbar.check_visible('username')
         courses_list_page_with_state.sidebar.check_visible()
-        courses_list_page_with_state.check_visible_courses_title()
-        courses_list_page_with_state.check_visible_create_course_button()
+        courses_list_page_with_state.toolbar_view.check_visible()
         courses_list_page_with_state.check_visible_empty_view()
 
 @pytest.mark.courses
@@ -52,9 +51,7 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         create_course_page.click_create_course_button()
 
         # Проверяем данные созданного курса
-        courses_list_page.check_visible_courses_title()
-
-        courses_list_page.check_visible_create_course_button()
+        courses_list_page.toolbar_view.check_visible()
         
         courses_list_page.course_view.check_visible(
                 index=0, title='Playwright', max_score='100', min_score='10', estimated_time='2 weeks'
