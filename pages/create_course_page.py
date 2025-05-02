@@ -3,7 +3,7 @@ from playwright.sync_api import Page, expect
 from components.views.empty_view_component import EmptyViewComponent
 from components.views.image_upload_widget_component import ImageUploadWidgetComponent
 from components.navigation.navbar_component import NavbarComponent
-from components.courses.create_course_exercise_form_component import CreateCourseExerciseFormComponent
+from components.courses.create_course_exercise_form_component import CourseExercisesFormComponent
 from pages.base_page import BasePage
 
 
@@ -14,7 +14,7 @@ class CreateCoursePage(BasePage):
         self.navbar = NavbarComponent(page)
         self.excercises_empty_view = EmptyViewComponent(page, identifier='create-course-exercises')
         self.image_upload_widget = ImageUploadWidgetComponent(page, identifier='create-course-preview')
-        self.create_exercise_form = CreateCourseExerciseFormComponent(page)
+        self.create_exercise_form = CourseExercisesFormComponent(page)
 
         # Заголовок и кнопка создания курса
         self.create_course_title = page.get_by_test_id('create-course-toolbar-title-text')
