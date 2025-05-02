@@ -4,14 +4,6 @@ from playwright.sync_api import Page, expect
 
 
 class CourseExercisesFormComponent(BaseComponent):
-    def __init__(self, page: Page):
-        super().__init__(page)
-
-        self.subtitle = ...
-        self.delete_button = ...
-        self.title_input = ...
-        self.description_input = ...
-
     def click_delete_button(self, index: int):
         delete_button = self.page.get_by_test_id(
             f'create-course-exercise-{index}-box-toolbar-delete-exercise-button'
@@ -45,3 +37,4 @@ class CourseExercisesFormComponent(BaseComponent):
 
         description_input.fill(description)
         expect(description_input).to_have_value(description)
+        
