@@ -11,11 +11,11 @@ class SidebarListItemComponent(BaseComponent):
     def __init__(self, page: Page, identifier: str):
         super().__init__(page)
 
+        self.identifier = identifier
         # Формируем локаторы динамически
         self.icon = Icon(page, '{identifier}-drawer-list-item-icon', 'Sidebar icon')
         self.title = Text(page, '{identifier}-drawer-list-item-title-text', 'Sidebar title')
         self.button = Button(page, '{identifier}-drawer-list-item-button', 'Sidebar button')
-        self.identifier = identifier
 
     def check_visible(self, title: str):
         self.icon.check_visible(identifier=self.identifier)
