@@ -4,7 +4,7 @@ from components.dashboard.dashboard_toolbar_view_component import DashboardToolb
 from components.charts.chart_view_component import ChartViewComponent
 from pages.base_page import BasePage
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 
 

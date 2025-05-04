@@ -1,7 +1,7 @@
 from components.base_component import BaseComponent
 from elements.input import Input
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 
 class RegistrationFormComponent(BaseComponent):

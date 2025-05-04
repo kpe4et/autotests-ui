@@ -2,7 +2,7 @@ from pages.base_page import BasePage
 from components.authentication.registration_form_component import RegistrationFormComponent
 from elements.button import Button
 
-from playwright.sync_api import expect, Page
+from playwright.sync_api import Page
 
 
 class RegistrationPage(BasePage):
