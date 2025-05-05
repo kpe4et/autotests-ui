@@ -4,6 +4,8 @@ from elements.button import Button
 
 from playwright.sync_api import Page
 
+import re
+
 
 class RegistrationPage(BasePage):
     def __init__(self, page: Page):
@@ -15,4 +17,4 @@ class RegistrationPage(BasePage):
 
     def click_registration_button(self):
         self.registration_button.click()
-        
+        self.check_current_url(re.compile(".*/#/auth/registration"))
