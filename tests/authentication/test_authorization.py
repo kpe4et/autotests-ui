@@ -8,6 +8,7 @@ from tools.allure.tags import AllureTag
 from tools.allure.epics import AllureEpic
 from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
+from allure_commons.types import Severity
 
 
 
@@ -27,6 +28,7 @@ class TestAuthorization:
         )
         @allure.tag(AllureTag.USER_LOGIN)
         @allure.title("User login with wrong password")
+        @allure.severity(Severity.CRITICAL)
         def test_wrong_email_or_password_authorization(self, login_page: LoginPage, email: str, password: str):
                 login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
                 login_page.login_form.check_visible(email='', password='') # проверим, что форма авторизации отображается и не заполнена
@@ -37,6 +39,7 @@ class TestAuthorization:
 
         @allure.tag(AllureTag.USER_LOGIN)
         @allure.title("User login with correct email and password")
+        @allure.severity(Severity.BLOCKER)
         def test_successful_authorization(self, login_page: LoginPage, registration_page: RegistrationPage, dashboard_page: DashboardPage):
                 registration_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
                 registration_page.registration_form.fill(email="user.name@gmail.com", username="username", password="password")
@@ -56,6 +59,7 @@ class TestAuthorization:
 
         @allure.tag(AllureTag.NAVIGATION)
         @allure.title("Navigate from login page to registration page")
+        @allure.severity(Severity.NORMAL)
         def test_navigate_from_authorization_to_registration(self, login_page: LoginPage, registration_page: RegistrationPage):
                 login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
                 login_page.click_registration_link()
