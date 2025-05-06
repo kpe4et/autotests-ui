@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class AllureTags(str, Enum):
+class AllureTag(str, Enum):
     REGRESSION = "REGRESSION"
     COURSES = "COURSES"
     DASHBOARD = "DASHBOARD"
