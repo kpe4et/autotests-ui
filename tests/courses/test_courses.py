@@ -1,11 +1,16 @@
 import pytest
+import allure
+
 from pages.courses.courses_list_page import CoursesListPage
 from pages.courses.create_course_page import CreateCoursePage
+from tools.allure.tags import AllureTags
 
 
 @pytest.mark.courses
 @pytest.mark.regression
+@allure.tag(AllureTags.REGRESSION, AllureTags.COURSES)
 class TestCourses:
+        @allure.title("Check displaying of empty courses list")
         def test_empty_courses_list(self, courses_list_page: CoursesListPage):
                 
                 courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
@@ -15,6 +20,7 @@ class TestCourses:
                 courses_list_page.toolbar_view.check_visible()
                 courses_list_page.check_visible_empty_view()
 
+        @allure.title("Create course")
         def test_create_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
                 
                 # Проверяем страницу создания курса
@@ -51,6 +57,7 @@ class TestCourses:
                         index=0, title='Playwright', max_score='100', min_score='10', estimated_time='2 weeks'
                 )
 
+        @allure.title("Edit course")
         def test_edit_course(self, create_course_page: CreateCoursePage, courses_list_page: CoursesListPage):
                 create_course_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
                 create_course_page.create_course_form.fill(
