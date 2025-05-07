@@ -15,8 +15,11 @@ from tools.allure.stories import AllureStory
 @pytest.mark.registration  # Добавили маркировку registration
 @allure.tag(AllureTag.REGRESSION, AllureTag.REGISTRATION)
 @allure.epic(AllureEpic.LMS)
+@allure.parent_suite(AllureEpic.LMS)
 @allure.feature(AllureFeature.AUTHENTICATION)
+@allure.suite(AllureFeature.AUTHENTICATION)
 @allure.story(AllureStory.REGISTRATION)
+@allure.sub_suite(AllureStory.REGISTRATION)
 class TestRegistration:
     @allure.title("Registration with correct email, username and password")
     @allure.severity(Severity.CRITICAL)

@@ -14,8 +14,11 @@ from tools.allure.stories import AllureStory
 @pytest.mark.regression
 @allure.tag(AllureTag.REGRESSION, AllureTag.COURSES)
 @allure.epic(AllureEpic.LMS)
+@allure.parent_suite(AllureEpic.LMS)
 @allure.feature(AllureFeature.COURSES)
+@allure.suite(AllureFeature.COURSES)
 @allure.story(AllureStory.COURSES)
+@allure.sub_suite(AllureStory.COURSES)
 class TestCourses:
         @allure.title("Check displaying of empty courses list")
         @allure.severity(Severity.NORMAL)
