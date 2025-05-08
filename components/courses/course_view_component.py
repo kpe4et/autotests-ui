@@ -4,6 +4,7 @@ from elements.text import Text
 from elements.image import Image
 
 from playwright.sync_api import Page
+import allure
 
 class CourseViewComponent(BaseComponent):
     def __init__(self, page: Page):
@@ -17,8 +18,8 @@ class CourseViewComponent(BaseComponent):
         self.min_score = Text(page, 'course-min-score-info-row-view-text', 'Min score')
         self.estimated_time = Text(page, 'course-estimated-time-info-row-view-text', 'Estimated time')
         
+    @allure.step('Check visible course view at index {index}')
     def check_visible(self, index: int, title: str, max_score: str, min_score: str, estimated_time: str):
-        
         self.image.check_visible(nth=index)
 
         self.title.check_visible(nth=index)
