@@ -1,18 +1,26 @@
-import pytest # Импортируем pytest
+import allure
+import pytest
+from _pytest.fixtures import SubRequest
 from playwright.sync_api import Page, Playwright
+
 from pages.authentication.registration_page import RegistrationPage
 
 
 @pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно1
-def chromium_page(playwright: Playwright) -> Page:  # Аннотируем возвращаемое фикстурой значение
+def chromium_page(request: SubRequest,playwright: Playwright) -> Page:
     # Запускаем браузер
     browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     # Передаем страницу для использования в тесте
     yield browser.new_page()
 
-    # Закрываем браузер после выполнения тестов
+    # Закрываем браузер после выполнения тестов. request.node.name содержит название текущего автотеста
+    context.tracing.stop(path=f'./tracing/{request.node.name}.zip')
     browser.close()
+
+    allure.attach.file(f'./tracing/{request.node.name}.zip', name='trace', attachment_type='application/zip')
 
 # Установка состояния браузера в качестве фикстуры
 @pytest.fixture(scope='session')
@@ -34,10 +42,15 @@ def initialize_browser_state(playwright: Playwright) -> None:
 
 
 # Фикстура для запуска тестов с сохраненным состоянием браузера
-#@pytest.fixture(autouse=True) мешает
 @pytest.fixture
-def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Page:
+def chromium_page_with_state(initialize_browser_state, request: SubRequest, playwright: Playwright) -> Page:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context(storage_state="browser-state.json")
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    
     yield context.new_page()
+    
+    context.tracing.stop(path=f'./tracing/{request.node.name}.zip')
     browser.close()
+
+    allure.attach.file(f'./tracing/{request.node.name}.zip', name='trace', attachment_type='application/zip')
