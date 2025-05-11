@@ -1,7 +1,8 @@
 from enum import Enum
+from typing import Self
 
-from pydantic_settings import BaseSettings
-from pydantic import EmailStr, FilePath, HttpUrl, DirectoryPath, BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import EmailStr, FilePath, HttpUrl, DirectoryPath, BaseModel, Field
 
 
 class Browser(str, Enum):
@@ -21,6 +22,12 @@ class TestData(BaseModel):
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=".env",  # Указываем, из какого файла читать настройки
+        env_file_encoding="utf-8",  # Указываем кодировку файла
+        env_nested_delimiter="."  # Указываем разделитель для вложенных переменных
+    )
+
     app_url: HttpUrl
     headless: bool
     browsers: list[Browser]
@@ -29,3 +36,26 @@ class Settings(BaseSettings):
     videos_dir: DirectoryPath
     tracing_dir: DirectoryPath
     browser_state_file: FilePath
+
+    @classmethod
+    def initialize(cls) -> Self:
+        # Указываем пути
+        videos_dir = DirectoryPath("./videos")
+        tracing_dir = DirectoryPath("./tracing")
+        browser_state_file = FilePath("./browser-state.json")
+
+        # Создаем папки, если они не существуют
+        videos_dir.mkdir(exist_ok=True) # Если папка существует, то игнорируем ошибку
+        tracing_dir.mkdir(exist_ok=True)
+        # Создаем файл состояния браузера, если он не существует
+        browser_state_file.touch(exist_ok=True)
+
+        # Возвращаем настройки с инициализированными значениями
+        return Settings(
+            videos_dir=videos_dir,
+            tracing_dir=tracing_dir,
+            browser_state_file=browser_state_file
+        )
+
+            
+settings = Settings.initialize()
