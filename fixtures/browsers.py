@@ -9,9 +9,13 @@ from tools.playwright.pages import initialize_playwright_page
 from tools.routes import AppRoute
 
 
-@pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно1
+@pytest.fixture(params=settings.browsers)  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно1
 def chromium_page(request: SubRequest,playwright: Playwright) -> Page:
-    yield from initialize_playwright_page(playwright, test_name=request.node.name)
+    yield from initialize_playwright_page(
+        playwright, 
+        test_name=request.node.name, 
+        browser_type=request.param
+    )
 
 # Установка состояния браузера в качестве фикстуры
 @pytest.fixture(scope='session')
@@ -33,6 +37,11 @@ def initialize_browser_state(playwright: Playwright) -> None:
 
 
 # Фикстура для запуска тестов с сохраненным состоянием браузера
-@pytest.fixture
+@pytest.fixture(params=settings.browsers)
 def chromium_page_with_state(initialize_browser_state, request: SubRequest, playwright: Playwright) -> Page:
-    yield from initialize_playwright_page(playwright, test_name=request.node.name, storage_state=settings.browser_state_file)
+    yield from initialize_playwright_page(
+        playwright, 
+        test_name=request.node.name, 
+        storage_state=settings.browser_state_file, 
+        browser_type=request.param
+    )
