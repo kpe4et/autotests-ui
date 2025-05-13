@@ -1,10 +1,16 @@
 from config import settings
 
+import platform
+import sys
+
 
 def create_allure_environment_file():
     # Создаем список из элементов в формате {key}={value}
     items = [f'{key}={value}' for key, value in settings.model_dump().items()]
 
+    # Добавляем информацию о системе и версии Python в список
+    items.append(f'os={platform.system() + ', ' + platform.release()}')
+    items.append(f'python={sys.version}')
 
     # Собираем все элементы в единую строку с переносами
     properties = '\n'.join(items)
