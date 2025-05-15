@@ -15,3 +15,6 @@ allure-report
 *.json
 videos
 tracing
+
+.gitignore
+requirements.txt
