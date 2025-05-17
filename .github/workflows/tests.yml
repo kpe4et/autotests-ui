@@ -66,7 +66,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
             name: allure-results
-            
+            path: allure-results
+
       # 6. Шаг для генерации и отображения отчёта Allure
       - name: Generates Allure Report with history
         uses: simple-elf/allure-report-action@v1.7  # Используем готовое решение из GitHub Marketplace для генерации Allure отчёта
