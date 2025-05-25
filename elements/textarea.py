@@ -22,7 +22,7 @@ class TextArea(BaseElement):
         #  - сначала получаем общий селектор блока
         #  - затем уточняем путь до самого textarea, добавляя '[1]'
         # Это нужно, чтобы трекер точно знал, с каким элементом шло взаимодействие.
-        return f'{super().get_raw_locator(**kwargs)}[1]'
+        return f'{super().get_raw_locator(nth, **kwargs)}//textarea[1]'
     
     def fill(self, value: str, nth: int = 0, **kwargs):
         step = f'Fill {self.type_of} "{self.name}" to value "{value}"'
