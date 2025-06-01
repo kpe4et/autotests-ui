@@ -1,6 +1,7 @@
 # vsc
 __pycache__
 __pycache__/playwright_registration.cpython-312.pyc
+.pytest_cache
 
 # python
 .venv
